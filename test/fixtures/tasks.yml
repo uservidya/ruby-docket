@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  body: MyText
+  estimate: 1.5
+  completed_at: 2013-10-25 18:30:08
+  project: one (Project)
+  reporter: one (User) 
+  owner:
+
+two:
+  name: MyString
+  body: MyText
+  estimate: 1.5
+  completed_at: 2013-10-25 18:30:08
+  project: two (Project)
+  reporter: two (User)
+  owner:
