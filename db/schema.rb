@@ -19,4 +19,13 @@ ActiveRecord::Schema.define(version: 20131025223007) do
     t.datetime "updated_at"
   end
 
+  create_table "users", force: true do |t|
+    t.string   "name",       null: false
+    t.integer  "team_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["team_id"], name: "index_users_on_team_id"
+
 end
