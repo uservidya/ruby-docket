@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  body: MyText
+  deleted_at:
+  task: one (Task)
+  user: one (User)
+
+deleted:
+  body: body of the comment
+  deleted_at: 2013-10-26 02:29:04
+  task: one (Task)
+  user: one (User)
+

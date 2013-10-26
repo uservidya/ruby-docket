@@ -1,4 +1,6 @@
 Docket::Application.routes.draw do
+  resources :comments
+
   resources :tasks
 
   resources :projects
