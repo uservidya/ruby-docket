@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131025233008) do
+ActiveRecord::Schema.define(version: 20131026001235) do
 
   create_table "projects", force: true do |t|
     t.string   "name",         null: false
@@ -34,8 +34,10 @@ ActiveRecord::Schema.define(version: 20131025233008) do
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "ancestry"
   end
 
+  add_index "tasks", ["ancestry"], name: "index_tasks_on_ancestry"
   add_index "tasks", ["owner_id"], name: "index_tasks_on_owner_id"
   add_index "tasks", ["project_id"], name: "index_tasks_on_project_id"
   add_index "tasks", ["reporter_id"], name: "index_tasks_on_reporter_id"

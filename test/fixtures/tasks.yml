@@ -17,3 +17,18 @@ two:
   project: two (Project)
   reporter: two (User)
   owner:
+
+grandparent:
+  name: grandparent
+  project: two (Project)
+  reporter: two (User)
+
+parent:
+  name: parent
+  project: two (Project)
+  reporter: two (User)
+
+child:
+  name: child
+  project: two (Project)
+  reporter: two (User)
