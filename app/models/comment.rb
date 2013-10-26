@@ -2,6 +2,8 @@ class Comment < ActiveRecord::Base
   belongs_to :task
   belongs_to :user
 
+  has_ancestry orphan_strategy: :destroy
+
   alias_attribute :author, :user
 
   def content

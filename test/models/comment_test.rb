@@ -26,4 +26,28 @@ class CommentTest < ActiveSupport::TestCase
     assert_equal 'body of the comment',
                  comment.content
   end
+
+  test 'ancestry' do
+    # Setup Test Data
+    grandparent = comments(:grandparent)
+
+    parent = comments(:parent)
+    parent.parent = grandparent
+    parent.save!
+
+    child = comments(:child)
+    child.parent = parent
+    child.save!
+
+    # Test ancestral relations
+    assert_equal [], grandparent.ancestors
+    assert_equal [grandparent], parent.ancestors
+    assert_equal [grandparent, parent], child.ancestors
+
+    # Test basic depth calculation
+    [grandparent, parent, child].each_with_index do |node, idx|
+      assert_equal idx, node.depth
+    end
+
+  end
 end

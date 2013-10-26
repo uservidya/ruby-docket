@@ -20,8 +20,10 @@ ActiveRecord::Schema.define(version: 20131026072904) do
     t.integer  "user_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "ancestry"
   end
 
+  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry"
   add_index "comments", ["task_id"], name: "index_comments_on_task_id"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 

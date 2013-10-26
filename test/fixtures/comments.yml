@@ -12,3 +12,17 @@ deleted:
   task: one (Task)
   user: one (User)
 
+grandparent:
+  body: grandparent
+  task: one (Task)
+  user: one (User)
+
+parent:
+  body: parent
+  task: one (Task)
+  user: one (User)
+
+child:
+  body: child
+  task: one (Task)
+  user: one (User)
