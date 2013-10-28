@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
   belongs_to :team
 
   has_many :comments
+
+  def username
+    !name.nil? ? name : id
+  end
 end

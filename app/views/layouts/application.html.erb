@@ -40,15 +40,16 @@
   <div class="row">
     <div class="large-8 columns">
       <div class="panel radius">
-          <a href="/">Home</a>
-          <a href="/teams">Teams</a>
-          <a href="/projects">Projects</a>
+        <a href="/"><%= Icon.home %> Home</a> | 
+        <a href="/teams"><%= Icon.team %> Teams</a> | 
+        <a href="/projects"><%= Icon.projects %> Projects</a>
       </div>
     </div>
     <div class="large-4 columns">
-      <div class="panel radius">
+      <div class="panel radius"><%= Icon.user %>
         <%- if user_signed_in? -%>
-          USER - <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+          <%= link_to current_user.username, edit_user_registration_path %> | 
+          <%= link_to "#{Icon.logout} Sign out".html_safe, destroy_user_session_path, :method => :delete %>
         <%- else -%>
           <%= link_to('Sign in!', '/users/sign_in') %>
         <%- end -%>
