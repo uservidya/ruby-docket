@@ -1,1 +1,68 @@
-<h1> This doesn't do anything yet! </h1>
+<% content_for(:title) { 'User Dashboard' } %>
+
+<h4>Projects</h4>
+<div class="panel">
+  <h5>Open</h5>
+  <div class="panel row-container">
+    <% current_user.projects.incomplete.each do |project| %>
+      <div class="row">
+        <div class="large-3 columns">
+          <div class="progress">
+            <span class="meter embedded-pct" style="width: <%= project.formatted_completion %>">
+              <%= project.formatted_completion %>
+            </span>
+          </div>
+        </div>
+        <div class="large-9 columns">
+          <strong><%= link_to(project.name, project) %></strong>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <h5>Recently Completed</h5>
+  <div class="panel row-container">
+    <% current_user.projects.complete.recent.each do |project| %>
+      <div class="row">
+        <div class="large-3 columns">
+          <small>
+            Completed at <%= Formatter.format_time(project.completed_at) %>
+          </small>
+        </div>
+        <div class="large-9 columns">
+          <%= link_to(project.name, project, class: 'completed') %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+
+<br>
+
+<h4>Tasks</h4>
+<div class="panel">
+  <h5>Owned</h5>
+  <div class="panel row-container">
+    <% current_user.owned.incomplete.each do |task| %>
+    <div class="row">
+      <div class="large-6 columns">
+        <%= link_to(task.description, task) %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <br>
+
+  <h5>Reported</h5>
+  <div class="panel row-container">
+    <% current_user.reported.incomplete.each do |task| %>
+    <div class="row">
+      <div class="large-6 columns">
+        <%= link_to(task.description, task) %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

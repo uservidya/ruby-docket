@@ -6,4 +6,8 @@ class Task < ActiveRecord::Base
   has_many :comments
 
   has_ancestry orphan_strategy: :restrict
+
+  def self.incomplete
+    where('tasks.completed_at IS NULL')
+  end
 end

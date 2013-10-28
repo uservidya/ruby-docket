@@ -6,8 +6,18 @@ class User < ActiveRecord::Base
   belongs_to :team
 
   has_many :comments
+  has_many :owned, class_name: 'Task', foreign_key: 'owner_id'
+  has_many :reported, class_name: 'Task', foreign_key: 'reporter_id'
 
   def username
     !name.nil? ? name : id
+  end
+
+  def tasks
+    owned + reported
+  end
+
+  def projects
+    team.try(:projects) || []
   end
 end

@@ -14,3 +14,40 @@
 
  @import "foundation_and_overrides";
  @import "foundation-icons";
+
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+
+.scaps {
+  font-variant:small-caps;
+}
+
+.size-12 {
+  font-size: 12pt;
+}
+
+.size-14 {
+  font-size: 14pt;
+}
+
+.size-16 {
+  font-size: 16pt;
+}
+
+.size-18 {
+  font-size: 18pt;
+}
+
+.row-container {
+  max-height: 300px;
+  overflow: scroll;
+}
+
+.embedded-pct {
+  text-align: center;
+  font-size: 0.75em;
+}
