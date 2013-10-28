@@ -6,6 +6,4 @@
 
 <br>
 
-<% @projects.each_with_index do |project, idx| %>
-  <%= render 'shared/proj_list', project: project, idx: idx %>
-<% end %>
+<%= render 'shared/proj_list', projects: @projects %>
