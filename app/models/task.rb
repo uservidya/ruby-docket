@@ -11,6 +11,10 @@ class Task < ActiveRecord::Base
     where('tasks.completed_at IS NULL')
   end
 
+  def owned?
+    !owner_id.nil?
+  end
+
   def complete?
     !completed_at.nil?
   end
@@ -32,5 +36,9 @@ class Task < ActiveRecord::Base
   def complete!
     self.completed_at = Time.now
     self.save!
+  end
+
+  def formatted_body
+    Formatter.format_markdown(body)
   end
 end

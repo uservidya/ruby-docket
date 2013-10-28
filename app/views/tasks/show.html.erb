@@ -1,39 +1,83 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="large-8 columns">
+    <div class="scaps">
+      <strong>Description:</strong><br>
+      <%= @task.name %>
+    </div>
+  </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @task.name %>
-</p>
+  <div class="large-4 columns">
+    <div class="scaps">
+      <strong>Estimate:</strong><br>
+      <%= @task.estimate||'(null)' %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Body:</strong>
-  <%= @task.body %>
-</p>
+<br>
 
-<p>
-  <strong>Estimate:</strong>
-  <%= @task.estimate %>
-</p>
+<div class="row">
+  <div class="large-4 columns">
+    <div class="scaps">
+      <strong>Reporter:</strong><br>
+      <% unless @task.reporter.nil? %>
+        <%= link_to(@task.reporter.name, @task.reporter) %>
+      <% else %>
+        No Reporter, ERROR
+      <% end %>
+    </div>
+  </div>
+  <div class="large-4 columns">
+    <div class="scaps">
+      <strong>Owner:</strong><br>
+      <% if @task.owned? %>
+        <%= link_to(@task.owner.name, @task.owner) %>
+      <% else %>
+        Unowned
+      <% end %>
+    </div>
+  </div>
+  <div class="large-4 columns">
+    <div class="scaps">
+      <% if @task.complete? %>
+        <strong>Completed at:</strong><br>
+        <%= Formatter.format_time(@task.completed_at) %>
+      <% else %>
+        <strong>Task incomplete!</strong><br>
+        <%= link_to('complete now', complete_task_path(@task)) %>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Completed at:</strong>
-  <%= @task.completed_at %>
-</p>
+<br>
 
-<p>
-  <strong>Project:</strong>
-  <%= @task.project %>
-</p>
+<%- unless @task.parent.nil? -%>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="scaps">
+      <strong>Parent:</strong><br>
+      <%= link_to(@task.parent.description, @task.parent) %>
+    </div>
+  </div>
+</div>
+<%- end -%>
 
-<p>
-  <strong>Reporter:</strong>
-  <%= @task.reporter %>
-</p>
+<br>
 
-<p>
-  <strong>Owner:</strong>
-  <%= @task.owner %>
-</p>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="scaps">
+      <strong>Body:</strong><br>
+      <div class="panel">
+        <div style="padding:10px">
+          <%= @task.formatted_body.html_safe %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<%= link_to 'Back', :back %>
