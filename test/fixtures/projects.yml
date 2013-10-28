@@ -11,3 +11,21 @@ two:
   due_date: 2013-10-25
   completed_at: 2013-10-25 17:38:53
   team: two (Team)
+
+old:
+  name: MyString
+  due_date: 2013-10-25
+  completed_at: <%= Date.today - 21 %>
+  team: two (Team)
+
+done:
+  name: MyString
+  due_date: 2013-10-25
+  completed_at: <%= Date.today - 3 %>
+  team: two (Team)
+
+new:
+  name: MyString
+  due_date: 2013-10-25
+  completed_at:
+  team: two (Team)

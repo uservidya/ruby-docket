@@ -47,7 +47,7 @@
     <% current_user.owned.incomplete.each do |task| %>
     <div class="row">
       <div class="large-6 columns">
-        <%= link_to(task.description, task) %>
+        <%= link_to(task.name, task) %>
       </div>
     </div>
     <% end %>
@@ -60,7 +60,7 @@
     <% current_user.reported.incomplete.each do |task| %>
     <div class="row">
       <div class="large-6 columns">
-        <%= link_to(task.description, task) %>
+        <%= link_to(task.name, task) %>
       </div>
     </div>
     <% end %>

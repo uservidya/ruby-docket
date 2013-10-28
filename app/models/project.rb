@@ -10,7 +10,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.recent(window = 7)
-    where('projects.created_at >= ?', Date.today - window)
+    where('projects.completed_at >= ?', Date.today - window)
   end
 
   def completable?
@@ -42,11 +42,11 @@ class Project < ActiveRecord::Base
   end
 
   def completion
-    total = tasks.map(&:weight).sum
+    ts = tasks.map { |t| [t.complete?, t.estimate || 1.0] }
+    total = ts.map {|t| t[1] }.sum
+    complete = ts.map {|t| t[1] if t[0]}.compact.sum
 
-    return 0.0 if total.zero? || total.nil?
-
-    tasks.complete.map(&:weight).sum / total.to_f
+    total.zero? || total.nil? ? 0.0 : complete/total.to_f
   end
 
   def formatted_completion
