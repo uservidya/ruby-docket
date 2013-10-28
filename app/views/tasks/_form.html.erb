@@ -11,34 +11,64 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="row">
+    <div class="large-10 columns">
+      <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </div>
+    </div>
+
+    <div class="large-2 columns">
+      <div class="field">
+        <%= f.label :estimate %>
+        <%= f.text_field :estimate %>
+      </div>
+    </div>
   </div>
+
+  <div class="row">
+    <div class="large-6 columns">
+      <div class="field">
+        <%= f.label :reporter_id %>
+        <% if @task.id.nil? %>
+          <%= current_user.name %>
+        <% else %>
+          <%= @task.reporter.name %>
+        <% end %>
+      </div>
+    </div>
+    <div class="large-6 columns">
+      <div class="field">
+        <%= f.label :owner_id %>
+        <%= collection_select(:task, :owner_id, @task.project_users, :id, :name, prompt: true) %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-6 columns">
+      <div class="field">
+        <%= f.label :parent_id %>
+        <%= collection_select(:task, :parent_id, @task.project.tasks - [@task], :id, :name, selected: @task.parent_id ) %>
+      </div>
+    </div>
+    <div class="large-6 columns">
+      <div class="field">
+        <%= f.label :project_id %>
+        <%= collection_select(:task, :project_id, current_user.projects, :id, :name, selected: @task.project_id ) %>
+      </div>
+    </div>
+  </div>
+
   <div class="field">
-    <%= f.label :body %><br>
+    <%= f.label :body %>
     <%= f.text_area :body %>
   </div>
-  <div class="field">
-    <%= f.label :estimate %><br>
-    <%= f.text_field :estimate %>
-  </div>
-  <div class="field">
-    <%= f.label :completed_at %><br>
-    <%= f.datetime_select :completed_at %>
-  </div>
-  <div class="field">
-    <%= f.label :project %><br>
-    <%= f.text_field :project %>
-  </div>
-  <div class="field">
-    <%= f.label :reporter %><br>
-    <%= f.text_field :reporter %>
-  </div>
-  <div class="field">
-    <%= f.label :owner %><br>
-    <%= f.text_field :owner %>
-  </div>
+
+  <%# only give the hidden field on create; not edit %>
+  <%= f.hidden_field :reporter_id, value: current_user.id if @task.id.nil? %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

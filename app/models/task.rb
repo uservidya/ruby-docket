@@ -7,8 +7,14 @@ class Task < ActiveRecord::Base
 
   has_ancestry orphan_strategy: :restrict
 
+  validates :name, :reporter_id, :project_id, presence: true
+
   def self.incomplete
     where('tasks.completed_at IS NULL')
+  end
+
+  def project_users
+    project.team.users
   end
 
   def owned?

@@ -13,7 +13,11 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new
+    @task = Task.new(
+      name: 'Replace Me...',
+      parent_id: params[:task][:parent_id],
+      project_id: params[:task][:project_id]
+    )
   end
 
   # GET /tasks/1/edit
