@@ -32,6 +32,10 @@ gem 'compass'
 gem 'zurb-foundation', '~> 4.0.0'
 gem 'foundation-icons-sass-rails'
 
+group :development, :test do
+  gem 'pry'
+end
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
