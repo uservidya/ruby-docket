@@ -70,7 +70,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   def destroy
     @task.destroy
-    redirect_to tasks_url, notice: 'Task was successfully destroyed.'
+    redirect_to :back, notice: 'Task was successfully destroyed.'
   end
 
   private
