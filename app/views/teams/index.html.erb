@@ -1,27 +1,39 @@
-<h1>Listing teams</h1>
+<div class="row">
+  <div class="large-10 columns">
+    <strong>Listing teams</strong>
+  </div>
+  <div class="large-2 columns">
+      <%= link_to new_team_path do %>
+        <span class="tiny secondary button">New Team</span>
+      <% end %>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<div class="row">
+  <div class="large-3 columns">
+    <strong>Name</strong>
+  </div>
+  <div class="large-7 columns">
+    <strong>Users</strong>
+  </div>
+  <div class="large-2 columns"> </div>
+</div>
 
-  <tbody>
-    <% @teams.each do |team| %>
-      <tr>
-        <td><%= team.name %></td>
-        <td><%= link_to 'Show', team %></td>
-        <td><%= link_to 'Edit', edit_team_path(team) %></td>
-        <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Team', new_team_path %>
+<% @teams.each do |team| %>
+  <div class="row">
+    <div class="large-3 columns">
+      <%= link_to(team.name, team) %>
+    </div>
+    <div class="large-7 columns">
+      <small><%= team.user_names %></small>
+    </div>
+    <div class="large-2 columns">
+      <%= link_to edit_team_path(team), title: 'Edit Team' do %>
+        <%= Icon.edit %>
+      <% end %>
+      <%= link_to team, title: 'Delete Team', method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <%= Icon.delete %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
