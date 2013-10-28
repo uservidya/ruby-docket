@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :complete, :uncomplete]
+  before_filter :authenticate_user!, :only => [:destroy, :update, :edit, :complete, :uncomplete]
 
   # GET /projects
   def index
@@ -27,6 +28,25 @@ class ProjectsController < ApplicationController
       redirect_to @project, notice: 'Project was successfully created.'
     else
       render action: 'new'
+    end
+  end
+  # PUT /projects/1/uncomplete
+  # PUT /projects/1/uncomplete.json
+  def uncomplete
+    @project.uncomplete!
+    respond_to do |format|
+      format.html { redirect_to request.referer, notice: 'Project uncompleted successfully!' }
+      format.json { head :no_content }
+    end
+  end
+
+  # PUT /projects/1/complete
+  # PUT /projects/1/complete.json
+  def complete
+    @project.complete!
+    respond_to do |format|
+      format.html { redirect_to request.referer, notice: 'Project completed successfully!' }
+      format.json { head :no_content }
     end
   end
 

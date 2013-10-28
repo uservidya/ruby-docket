@@ -1,24 +1,49 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="large-12 columns">
+    <strong>Name:</strong><br>
+    <%= @project.name %>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
+<br>
 
-<p>
-  <strong>Due date:</strong>
-  <%= @project.due_date %>
-</p>
+<div class="row">
+  <div class="large-6 columns">
+    <strong>Completed at:</strong><br>
+    <%= if @project.complete?
+      Formatter.format_time(@project.completed_at)
+    else
+      if @project.completable?
+        link_to('mark complete!', complete_project_path(@project))
+      else
+        '<a class="disabled">cannot complete with open tasks</a>'.html_safe
+      end
+    end %>
+  </div>
 
-<p>
-  <strong>Completed at:</strong>
-  <%= @project.completed_at %>
-</p>
+  <div class="large-6 columns">
+    <strong>Team:</strong><br>
+    <%= link_to(@project.team_name, @project.team) %>
+  </div>
+</div>
 
-<p>
-  <strong>Team:</strong>
-  <%= @project.team %>
-</p>
+<br>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<div class="row">
+  <div class="large-10 columns">
+    <strong>Tasks:</strong>
+  </div>
+  <div class="large-2 columns">
+    <%= link_to(new_task_path(task: {project_id: @project.id})) do -%>
+      <span class="button secondary tiny">New Task</span>
+    <%- end -%>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="large-12 columns">
+    <%- @project.tasks.roots.each do |task| -%>
+      <%= render('shared/task_list', task: task) -%>
+    <%- end -%>
+  </div>
+</div>

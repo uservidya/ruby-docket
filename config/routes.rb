@@ -2,9 +2,19 @@ Docket::Application.routes.draw do
   devise_for :users
   resources :comments
 
-  resources :tasks
+  resources :tasks do
+    member do
+      get :complete
+      get :uncomplete
+    end
+  end
 
-  resources :projects
+  resources :projects do
+    member do
+      get :complete
+      get :uncomplete
+    end
+  end
 
   resources :users do
     member do

@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :complete, :uncomplete]
+  before_filter :authenticate_user!, :only => [:destroy, :update, :edit, :new, :create, :complete, :uncomplete]
 
   # GET /tasks
   def index
@@ -36,6 +37,26 @@ class TasksController < ApplicationController
       redirect_to @task, notice: 'Task was successfully updated.'
     else
       render action: 'edit'
+    end
+  end
+
+  # PUT /tasks/1/uncomplete
+  # PUT /tasks/1/uncomplete.json
+  def uncomplete
+    @task.uncomplete!
+    respond_to do |format|
+      format.html { redirect_to @task.project, notice: 'Task uncompleted successfully!' }
+      format.json { head :no_content }
+    end
+  end
+
+  # PUT /tasks/1/complete
+  # PUT /tasks/1/complete.json
+  def complete
+    @task.complete!
+    respond_to do |format|
+      format.html { redirect_to @task.project, notice: 'Task completed successfully!' }
+      format.json { head :no_content }
     end
   end
 

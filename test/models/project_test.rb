@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class ProjectTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    @project = projects(:one)
+  end
+
+
 end
