@@ -17,16 +17,15 @@
   </div>
   <div class="field">
     <%= f.label :due_date %><br>
-    <%= f.date_select :due_date %>
-  </div>
-  <div class="field">
-    <%= f.label :completed_at %><br>
-    <%= f.datetime_select :completed_at %>
+    <%= f.text_field :due_date, class: 'datepicker' %>
   </div>
   <div class="field">
     <%= f.label :team %><br>
     <%= f.text_field :team %>
   </div>
+
+  <%= f.hidden_field :team_id, value: current_user.team_id if @project.id.nil? %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
