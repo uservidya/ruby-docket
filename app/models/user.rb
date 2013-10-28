@@ -9,10 +9,6 @@ class User < ActiveRecord::Base
   has_many :owned, class_name: 'Task', foreign_key: 'owner_id'
   has_many :reported, class_name: 'Task', foreign_key: 'reporter_id'
 
-  def username
-    !name.nil? ? name : id
-  end
-
   def tasks
     owned + reported
   end
