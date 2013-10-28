@@ -26,7 +26,10 @@ class TasksController < ApplicationController
 
   # POST /tasks
   def create
+    tp = task_params
+    parent = Task.find(tp.delete('parent_id')) if tp.has_key?('parent_id')
     @task = Task.new(task_params)
+    @task.parent = parent if parent
 
     if @task.save
       redirect_to @task, notice: 'Task was successfully created.'
@@ -78,6 +81,6 @@ class TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:name, :body, :estimate, :completed_at, :project_id, :reporter_id, :owner_id)
+      params.require(:task).permit(:name, :body, :estimate, :completed_at, :project_id, :reporter_id, :owner_id, :parent_id)
     end
 end

@@ -17,6 +17,27 @@
 <br>
 
 <div class="row">
+  <div class="large-8 columns">
+    <div class="scaps">
+      <strong>Project:</strong><br>
+        <%= link_to(@task.project.name, @task.project) %>
+    </div>
+  </div>
+  <div class="large-4 columns">
+    <div class="scaps">
+      <strong>Parent:</strong><br>
+      <%- if @task.is_root? -%>
+        (null)
+      <%- else -%>
+        <%= link_to(@task.parent.name, @task.parent) %>
+      <%- end -%>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
   <div class="large-4 columns">
     <div class="scaps">
       <strong>Reporter:</strong><br>
@@ -49,19 +70,6 @@
     </div>
   </div>
 </div>
-
-<br>
-
-<%- unless @task.parent.nil? -%>
-<div class="row">
-  <div class="large-12 columns">
-    <div class="scaps">
-      <strong>Parent:</strong><br>
-      <%= link_to(@task.parent.description, @task.parent) %>
-    </div>
-  </div>
-</div>
-<%- end -%>
 
 <br>
 
