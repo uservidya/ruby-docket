@@ -1,33 +1,11 @@
-<h1>Listing projects</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Due date</th>
-      <th>Completed at</th>
-      <th>Team</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-        <td><%= project.due_date %></td>
-        <td><%= project.completed_at %></td>
-        <td><%= project.team %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row">
+  <div class="large-10 columns">
+    <strong><%= current_user.team.name %> Projects:</strong>
+  </div>
+</div>
 
 <br>
 
-<%= link_to 'New Project', new_project_path %>
+<% @projects.each_with_index do |project, idx| %>
+  <%= render 'shared/proj_list', project: project, idx: idx %>
+<% end %>

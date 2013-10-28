@@ -17,6 +17,10 @@ class Project < ActiveRecord::Base
     tasks.all?(&:complete?)
   end
 
+  def deletable?
+    tasks.empty?
+  end
+
   def complete?
     !completed_at.nil?
   end

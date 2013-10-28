@@ -1,10 +1,10 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :complete, :uncomplete]
-  before_filter :authenticate_user!, :only => [:destroy, :update, :edit, :complete, :uncomplete]
+  before_filter :authenticate_user!, :only => [:index, :destroy, :update, :edit, :complete, :uncomplete]
 
   # GET /projects
   def index
-    @projects = Project.all
+    @projects = current_user.projects
   end
 
   # GET /projects/1
