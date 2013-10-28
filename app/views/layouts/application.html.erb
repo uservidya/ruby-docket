@@ -1,14 +1,89 @@
 <!DOCTYPE html>
-<html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-  <title>Docket</title>
+  <meta charset="utf-8" />
+
+  <!-- Uncomment to make IE8 render like IE7 -->
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title><%= "#{yield(:title)} - " if content_for?(:title) %>Docket</title>
+
+  <!-- Included CSS Files -->
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "vendor/custom.modernizr" %>
   <%= csrf_meta_tags %>
+  
+  <!-- Link to experimental Foundation 5 grid containing medium styles -->
+  <!-- <link rel="stylesheet" href="css/grid-5.css"> -->
+
 </head>
 <body>
 
-<%= yield %>
+  <!-- Header and Nav -->
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="panel">
+        <h1><%= image_tag('clipboard.png', size: '20x14') %> Docket <small>simple task management</small></h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-8 columns">
+      <ul class="breadcrumbs">
+        <li><a href="/">Home</a></li>
+        <li><a href="/teams">Teams</a></li>
+        <li><a href="/projects">Projects</a></li>
+      </ul>
+    </div>
+    <div class="large-4 columns">
+      <ul class="breadcrumbs">
+      </ul>
+    </div>
+  </div>
+  <!-- End Header and Nav -->
+
+  <div class="row">
+    <div class="large-12 columns">
+      <p id="notice" class="notice"><%= notice %></p>
+      <p id="alert" class="alert"><%= alert %></p>
+    </div>
+  </div>
+
+  <div style="overflow:scroll">
+
+    <div class="row" style="padding:15px">
+      <div class="large-12 columns scaps">
+        <%= yield %>
+      </div>
+    </div>
+
+    <!-- Footer -->
+
+    <footer class="row">
+      <div class="large-12 columns">
+        <hr />
+        <div class="row">
+          <div class="large-4 columns">
+            <p>&copy; Centro, LLC</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div> <!-- overflow -->
+
+  <%= javascript_include_tag "application" %>
 
 </body>
 </html>
+
