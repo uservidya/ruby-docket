@@ -1,9 +1,26 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @team.name %>
 </p>
+
+<div class="row">
+  <div class="large-10 columns">
+    <strong>Users:</strong><br>
+    <%= @team.users.map{|u| link_to(u.name,u)}.join(', ').html_safe %>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <div class="large-12 columns">
+  <% @team.projects.each do |project| %>
+    <%= render 'shared/proj_list', project: project %>
+  <% end %>
+  </div>
+</div>
+
+<br>
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', :back %>
