@@ -27,8 +27,14 @@ class TasksController < ApplicationController
   # POST /tasks
   def create
     tp = task_params
-    parent = Task.find(tp.delete('parent_id')) if tp.has_key?('parent_id')
-    @task = Task.new(task_params)
+
+    unless tp['parent_id'].nil? || tp['parent_id'].blank?
+      parent = Task.find(tp['parent_id'])
+    else
+      parent = nil
+    end
+
+    @task = Task.new(tp)
     @task.parent = parent if parent
 
     if @task.save

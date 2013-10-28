@@ -34,7 +34,7 @@
     <strong>Tasks:</strong>
   </div>
   <div class="large-2 columns">
-    <%= link_to(new_task_path(task: {project_id: @project.id})) do -%>
+    <%= link_to(new_task_path(task: {project_id: @project.id, parent_id: nil})) do -%>
       <span class="button secondary tiny">New Task</span>
     <%- end -%>
   </div>
