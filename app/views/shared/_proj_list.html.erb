@@ -18,28 +18,36 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="large-4 columns">
-      <%= link_to project.name, project %>
+<div class="row">
+  <div class="large-12 columns">
+  <% @team.projects.each do |project| %>
+
+    <div class="row">
+      <div class="large-4 columns">
+        <%= link_to project.name, project %>
+      </div>
+      <div class="large-2 columns scaps">
+        <%= Formatter.format_date(project.due_date) %>
+      </div>
+      <div class="large-2 columns scaps">
+        <%= project.completed_at.try(:to_formatted_s, :long) || 'incomplete' %>
+      </div>
+      <div class="large-2 columns scaps">
+        <%= project.team_name(true) || 'unassigned' %>
+      </div>
+      <div class="large-2 columns">
+        <%= link_to edit_project_path(project) do %>
+          <%= Icon.edit %>
+        <% end %>
+        <%= link_to project, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <%= Icon.delete %>
+        <% end if project.deletable? %>
+        <%= link_to "#stats-#{project.id}" do %>
+          <%= Icon.graph %>
+        <% end %>
+      </div>
     </div>
-    <div class="large-2 columns scaps">
-      <%= Formatter.format_date(project.due_date) %>
-    </div>
-    <div class="large-2 columns scaps">
-      <%= project.completed_at.try(:to_formatted_s, :long) || 'incomplete' %>
-    </div>
-    <div class="large-2 columns scaps">
-      <%= project.team_name(true) || 'unassigned' %>
-    </div>
-    <div class="large-2 columns">
-      <%= link_to edit_project_path(project) do %>
-        <%= Icon.edit %>
-      <% end %>
-      <%= link_to project, method: :delete, data: { confirm: 'Are you sure?' } do %>
-        <%= Icon.delete %>
-      <% end if project.deletable? %>
-      <%= link_to "#stats-#{project.id}" do %>
-        <%= Icon.graph %>
-      <% end %>
-    </div>
+
+  <% end %>
   </div>
+</div>

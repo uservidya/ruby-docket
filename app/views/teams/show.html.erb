@@ -12,13 +12,7 @@
 
 <br>
 
-<div class="row">
-  <div class="large-12 columns">
-  <% @team.projects.each do |project| %>
-    <%= render 'shared/proj_list', project: project %>
-  <% end %>
-  </div>
-</div>
+<%= render 'shared/proj_list', projects: @team.projects %>
 
 <br>
 
