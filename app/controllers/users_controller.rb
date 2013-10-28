@@ -12,7 +12,6 @@ class UsersController < ApplicationController
 
   # GET /users/dashboard
   def dashboard
-    redirect_to(new_user_session) unless user_signed_in?
   end
 
   # GET /users/new
