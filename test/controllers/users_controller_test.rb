@@ -1,8 +1,10 @@
 require 'test_helper'
+require 'securerandom'
 
 class UsersControllerTest < ActionController::TestCase
   setup do
     @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do
@@ -17,8 +19,11 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should create user" do
+    sign_out @user
+
     assert_difference('User.count') do
-      post :create, user: { name: @user.name, team_id: @user.team_id }
+      post :create, user: { name: "#{@user.name} 2", team_id: @user.team_id,
+          email: 'new_email@docket.tld', password: SecureRandom.hex(16) }
     end
 
     assert_redirected_to user_path(assigns(:user))

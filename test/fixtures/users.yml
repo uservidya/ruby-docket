@@ -2,8 +2,10 @@
 
 one:
   name: MyString
-  team_id: 
+  email: user_one@docket.tld
+  team_id: one (Team)
 
 two:
   name: MyString
-  team_id: 
+  email: user_two@docket.tld
+  team_id: two (Team)
