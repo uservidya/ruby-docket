@@ -15,16 +15,13 @@
 
  @import "foundation_and_overrides";
  @import "foundation-icons";
+ @import url(http://fonts.googleapis.com/css?family=Share+Tech);
 
 html {
   height: 100%;
 }
 body {
   min-height: 100%;
-}
-
-.scaps {
-  font-variant:small-caps;
 }
 
 .size-12 {
