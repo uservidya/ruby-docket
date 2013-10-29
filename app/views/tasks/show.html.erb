@@ -1,16 +1,12 @@
 <div class="row">
   <div class="large-8 columns">
-    <div class="scaps">
-      <strong>Name:</strong><br>
-      <%= @task.name %>
-    </div>
+    <strong>Name:</strong><br>
+    <%= @task.name %>
   </div>
 
   <div class="large-4 columns">
-    <div class="scaps">
-      <strong>Estimate:</strong><br>
-      <%= @task.estimate||'(null)' %>
-    </div>
+    <strong>Estimate:</strong><br>
+    <%= @task.estimate||'(null)' %>
   </div>
 </div>
 
@@ -18,20 +14,16 @@
 
 <div class="row">
   <div class="large-8 columns">
-    <div class="scaps">
-      <strong>Project:</strong><br>
-        <%= link_to(@task.project.name, @task.project) %>
-    </div>
+    <strong>Project:</strong><br>
+      <%= link_to(@task.project.name, @task.project) %>
   </div>
   <div class="large-4 columns">
-    <div class="scaps">
-      <strong>Parent:</strong><br>
-      <%- if @task.is_root? -%>
-        (null)
-      <%- else -%>
-        <%= link_to(@task.parent.name, @task.parent) %>
-      <%- end -%>
-    </div>
+    <strong>Parent:</strong><br>
+    <%- if @task.is_root? -%>
+      (null)
+    <%- else -%>
+      <%= link_to(@task.parent.name, @task.parent) %>
+    <%- end -%>
   </div>
 </div>
 
@@ -39,35 +31,29 @@
 
 <div class="row">
   <div class="large-4 columns">
-    <div class="scaps">
-      <strong>Reporter:</strong><br>
-      <% unless @task.reporter.nil? %>
-        <%= link_to(@task.reporter.name, @task.reporter) %>
-      <% else %>
-        No Reporter, ERROR
-      <% end %>
-    </div>
+    <strong>Reporter:</strong><br>
+    <% unless @task.reporter.nil? %>
+      <%= link_to(@task.reporter.name, @task.reporter) %>
+    <% else %>
+      No Reporter, ERROR
+    <% end %>
   </div>
   <div class="large-4 columns">
-    <div class="scaps">
-      <strong>Owner:</strong><br>
-      <% if @task.owned? %>
-        <%= link_to(@task.owner.name, @task.owner) %>
-      <% else %>
-        Unowned
-      <% end %>
-    </div>
+    <strong>Owner:</strong><br>
+    <% if @task.owned? %>
+      <%= link_to(@task.owner.name, @task.owner) %>
+    <% else %>
+      Unowned
+    <% end %>
   </div>
   <div class="large-4 columns">
-    <div class="scaps">
-      <% if @task.complete? %>
-        <strong>Completed at:</strong><br>
-        <%= Formatter.format_time(@task.completed_at) %>
-      <% else %>
-        <strong>Task incomplete!</strong><br>
-        <%= link_to('complete now', complete_task_path(@task)) %>
-      <% end %>
-    </div>
+    <% if @task.complete? %>
+      <strong>Completed at:</strong><br>
+      <%= Formatter.format_time(@task.completed_at) %>
+    <% else %>
+      <strong>Task incomplete!</strong><br>
+      <%= link_to('complete now', complete_task_path(@task)) %>
+    <% end %>
   </div>
 </div>
 
@@ -75,12 +61,10 @@
 
 <div class="row">
   <div class="large-12 columns">
-    <div class="scaps">
-      <strong>Body:</strong><br>
-      <div class="panel">
-        <div style="padding:10px">
-          <%= @task.formatted_body.html_safe %>
-        </div>
+    <strong>Body:</strong><br>
+    <div class="panel">
+      <div style="padding:10px">
+        <%= @task.formatted_body.html_safe %>
       </div>
     </div>
   </div>
