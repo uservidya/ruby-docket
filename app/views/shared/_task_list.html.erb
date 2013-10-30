@@ -32,7 +32,7 @@
 
         <small>
           <%= unless task.owner.nil?
-                link_to(task.owner_name, task.owner)
+                link_to(task.owner.name, task.owner)
               else
                 'unassigned'
           end %>
