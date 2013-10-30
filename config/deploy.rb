@@ -49,6 +49,18 @@ namespace :deploy do
   task :setup_db, :roles => :app do
     run "cd #{current_path}; rake RAILS_ENV=#{rails_env} db:setup"
   end
+
+
+  namespace :assets do
+    task :precompile, :roles => :web, :except => { :no_release => true } do
+      from = source.next_revision(current_revision) rescue nil
+      if ENV['FORCE_PRECOMPILE'] || from.nil? || capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
+        run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile --trace}
+      else
+        logger.info "Skipping asset pre-compilation because there were no asset changes"
+      end
+    end
+  end
 end
 
 require './config/boot'
