@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
+# Deployment
+gem 'capistrano', '~> 2.15'
+
 # Adding ancestry for Tasks
 gem 'ancestry'
 
