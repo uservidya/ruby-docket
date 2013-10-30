@@ -1,0 +1,3 @@
+# Docket - simple task management
+I got tired of installing a whole suite of apps when I just wanted a simple, nested TODO list. Instead, I wrote `docket`.
+
