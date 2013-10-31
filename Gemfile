@@ -39,6 +39,7 @@ gem 'foundation-icons-sass-rails'
 group :test do
   gem 'machinist'
   gem 'faker'
+  gem 'simplecov', :require => false
 end
 
 group :development, :test do
