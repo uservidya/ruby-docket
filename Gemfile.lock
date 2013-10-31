@@ -52,6 +52,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.0.2)
+    faker (1.2.0)
+      i18n (~> 0.5)
     foundation-icons-sass-rails (3.0.0)
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
@@ -64,6 +66,7 @@ GEM
     jquery-ui-rails (4.0.5)
       railties (>= 3.1.0)
     json (1.8.1)
+    machinist (2.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -142,9 +145,11 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   compass
   devise
+  faker
   foundation-icons-sass-rails
   jquery-rails
   jquery-ui-rails
+  machinist
   pry
   rails (= 4.0.0)
   redcarpet
