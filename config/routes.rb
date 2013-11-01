@@ -4,8 +4,8 @@ Docket::Application.routes.draw do
 
   resources :tasks do
     member do
-      get :complete
-      get :uncomplete
+      post :complete
+      post :uncomplete
     end
   end
 
