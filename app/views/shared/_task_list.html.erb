@@ -9,11 +9,11 @@
         <%- end -%>
 
         <%- if task.complete? -%>
-          <%= link_to uncomplete_task_path(task) do %>
+          <%= link_to uncomplete_task_path(task), method: :post do %>
             <%= Icon.uncomplete %>
           <%- end -%>
         <%- else -%>
-          <%= link_to complete_task_path(task) do %>
+          <%= link_to complete_task_path(task), method: :post do %>
             <%= Icon.complete %>
           <%- end if task.completable? -%>
         <%- end -%>

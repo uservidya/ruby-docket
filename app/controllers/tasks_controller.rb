@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy, :complete, :uncomplete]
-  before_filter :authenticate_user!, :only => [:destroy, :update, :edit, :new, :create, :complete, :uncomplete]
+  before_filter :authenticate_user!
 
   # GET /tasks
   def index
@@ -28,15 +28,11 @@ class TasksController < ApplicationController
   def create
     tp = task_params
 
-    unless tp['parent_id'].nil? || tp['parent_id'].blank?
-      parent = Task.find(tp['parent_id'])
-    else
-      parent = nil
-    end
-
     @task = Task.new(tp)
-    @task.parent = parent if parent
+    @task.parent = Task.find(tp['parent_id']) unless tp['parent_id'].nil? || tp['parent_id'].blank?
 
+    # FIXME this needs a validation to ensure that @task.project and
+    # @task.parent.project are the same
     if @task.save
       redirect_to @task, notice: 'Task was successfully created.'
     else
