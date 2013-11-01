@@ -1,5 +1,5 @@
   <div class="row">
-    <div class="large-4 columns">
+    <div class="large-5 columns">
       <strong>Project Name</strong>
     </div>
     <div class="large-2 columns">
@@ -8,7 +8,7 @@
     <div class="large-2 columns">
       <strong>Completion</strong>
     </div>
-    <div class="large-2 columns">
+    <div class="large-1 columns">
       <strong>Assignment</strong>
     </div>
     <div class="large-2 columns">
@@ -23,8 +23,8 @@
   <% projects.each do |project| %>
 
     <div class="row">
-      <div class="large-4 columns">
-        <%= link_to project.name, project %>
+      <div class="large-5 columns ellipsis">
+        <%= link_to project.name, project %> <span class='disabled'><%= project.description %></span>
       </div>
       <div class="large-2 columns">
         <%= Formatter.format_date(project.due_date) %>
@@ -32,8 +32,9 @@
       <div class="large-2 columns">
         <%= project.completed_at.try(:to_formatted_s, :long) || 'incomplete' %>
       </div>
-      <div class="large-2 columns">
-        <%= project.team_name(true) || 'unassigned' %>
+
+      <div class="large-1 columns">
+        <%= project.team_name || '(null)' %>
       </div>
       <div class="large-2 columns">
         <%= link_to edit_project_path(project) do %>

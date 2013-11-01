@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :complete, :uncomplete]
-  before_filter :authenticate_user!, :only => [:index, :destroy, :update, :edit, :complete, :uncomplete]
+  before_filter :authenticate_user!
 
   # GET /projects
   def index
@@ -22,20 +22,16 @@ class ProjectsController < ApplicationController
 
   # POST /projects
   def create
-    @project = Project.new(project_params)
+    @project = Project.create(project_params)
 
-    if @project.save
-      redirect_to @project, notice: 'Project was successfully created.'
-    else
-      render action: 'new'
-    end
+    redirect_to @project, notice: 'Project was successfully created.'
   end
   # PUT /projects/1/uncomplete
   # PUT /projects/1/uncomplete.json
   def uncomplete
     @project.uncomplete!
     respond_to do |format|
-      format.html { redirect_to request.referer, notice: 'Project uncompleted successfully!' }
+      format.html { redirect_to request.referer||project_path(@project), notice: 'Project uncompleted successfully!' }
       format.json { head :no_content }
     end
   end
@@ -45,7 +41,7 @@ class ProjectsController < ApplicationController
   def complete
     @project.complete!
     respond_to do |format|
-      format.html { redirect_to request.referer, notice: 'Project completed successfully!' }
+      format.html { redirect_to request.referer||project_path(@project), notice: 'Project completed successfully!' }
       format.json { head :no_content }
     end
   end
@@ -73,6 +69,6 @@ class ProjectsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def project_params
-      params.require(:project).permit(:name, :due_date, :completed_at, :team_id)
+      params.require(:project).permit(:name, :due_date, :completed_at, :team_id, :description)
     end
 end

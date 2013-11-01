@@ -37,7 +37,7 @@ class Project < ActiveRecord::Base
     update_attributes(completed_at: Time.now)
   end
 
-  def team_name(for_display = false)
+  def team_name
     team.name
   end
 

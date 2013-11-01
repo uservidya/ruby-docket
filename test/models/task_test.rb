@@ -2,7 +2,37 @@ require 'test_helper'
 
 class TaskTest < ActiveSupport::TestCase
   setup do
-    @task = tasks(:incomplete)
+    @project = Project.make!
+    @task = Task.make!(project: @project)
+  end
+
+  test 'scoped incomplete' do
+    new = Task.make!(project: @project, completed_at: Time.now)
+
+    assert_equal [@task], @project.tasks.incomplete
+
+    new.update_attributes(completed_at: nil)
+    @project.reload
+
+    assert_equal [@task, new], @project.tasks.incomplete
+  end
+
+  test 'project_users' do
+    assert_equal @project.team.users, @task.project_users
+  end
+
+  test 'formatted_body' do
+    @task.update_attributes(body: '# the body!')
+    assert_equal '<h1>the body!</h1>', @task.formatted_body.chomp
+  end
+
+  test 'owned?' do
+    assert_equal false, @task.owned?
+
+    @task.update_attributes(owner_id: @task.reporter_id)
+    @task.reload
+
+    assert_equal true, @task.owned?
   end
 
   test 'complete?' do

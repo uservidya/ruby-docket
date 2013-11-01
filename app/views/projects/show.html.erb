@@ -8,6 +8,15 @@
 <br>
 
 <div class="row">
+  <div class="large-12 columns">
+    <strong>Description:</strong><br>
+    <%= @project.description %>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
   <div class="large-6 columns">
     <strong>Completed at:</strong><br>
     <%= if @project.complete?
