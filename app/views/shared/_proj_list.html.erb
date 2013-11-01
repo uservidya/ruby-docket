@@ -33,7 +33,7 @@
         <%= project.completed_at.try(:to_formatted_s, :long) || 'incomplete' %>
       </div>
       <div class="large-2 columns">
-        <%= project.team_name(true) || 'unassigned' %>
+        <%= project.team_name || 'unassigned' %>
       </div>
       <div class="large-2 columns">
         <%= link_to edit_project_path(project) do %>

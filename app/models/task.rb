@@ -25,6 +25,10 @@ class Task < ActiveRecord::Base
     !completed_at.nil?
   end
 
+  def incomplete?
+    !complete?
+  end
+
   def destroyable?
     children.empty?
   end

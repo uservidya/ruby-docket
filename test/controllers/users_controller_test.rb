@@ -3,7 +3,7 @@ require 'securerandom'
 
 class UsersControllerTest < ActionController::TestCase
   setup do
-    @user = users(:one)
+    @user = User.make!
     sign_in @user
   end
 
@@ -22,8 +22,7 @@ class UsersControllerTest < ActionController::TestCase
     sign_out @user
 
     assert_difference('User.count') do
-      post :create, user: { name: "#{@user.name} 2", team_id: @user.team_id,
-          email: 'new_email@docket.tld', password: SecureRandom.hex(16) }
+      post :create, {user: { name: 'Foo', email: Faker::Internet.email, password: SecureRandom.hex(14), team_id: Team.last.id }}
     end
 
     assert_redirected_to user_path(assigns(:user))
@@ -40,8 +39,11 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should update user" do
+    # happy path
     patch :update, id: @user, user: { name: @user.name, team_id: @user.team_id }
     assert_redirected_to user_path(assigns(:user))
+
+    # FIXME unhappy path
   end
 
   test "should destroy user" do
