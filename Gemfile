@@ -40,6 +40,7 @@ group :test do
   gem 'machinist'
   gem 'faker'
   gem 'simplecov', :require => false
+  gem 'capybara-webkit'
 end
 
 group :development, :test do
