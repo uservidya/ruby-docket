@@ -41,6 +41,7 @@ group :test do
   gem 'faker'
   gem 'simplecov', :require => false
   gem 'capybara-webkit'
+  gem 'rubocop'
 end
 
 group :development, :test do
